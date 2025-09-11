@@ -38,12 +38,12 @@
                 <li>No tasks yet — add one above.</li>
             <?php else: ?>
 
-                <?php foreach ($tasks as $task): ?>
+                <?php foreach ($tasks as $todo): ?>
                     <li class='task-item'>
 
                         <!-- Task -->
-                        <span class="<?php echo $task['status'] === 'completed' ? 'completed-task' : ''; ?>">
-                            <?php echo htmlspecialchars($task['task']); ?>
+                        <span class="<?php echo $todo->isCompleted() ? 'completed-task' : ''; ?>">
+                            <?php echo htmlspecialchars($todo->task); ?>
                         </span>
 
                         
@@ -51,17 +51,17 @@
 
                             <!-- Toggle -->
                             <form action="/PHP101/todo-action" method="POST">
-                                <input type="hidden" name="task_id" value="<?php echo (int)$task['id']; ?>">
+                                <input type="hidden" name="task_id" value="<?php echo (int)$todo->id; ?>">
 
                                 <button type="submit" name="toggleTask"
-                                    class="<?php echo $task['status'] === 'completed' ? 'undo-btn' : 'active-btn'; ?>">
-                                    <?php echo $task['status'] === 'completed' ? 'Undo' : 'Mark Completed'; ?>
+                                    class="<?php echo $todo->isCompleted() ? 'undo-btn' : 'active-btn'; ?>">
+                                    <?php echo $todo->isCompleted() ? 'Undo' : 'Mark Completed'; ?>
                                 </button>
                             </form>
 
                             <!-- Delete -->
                             <form action="/PHP101/todo-action" method="POST">
-                                <input type="hidden" name="task_id" value="<?php echo (int)$task['id']; ?>">
+                                <input type="hidden" name="task_id" value="<?php echo (int)$todo->id; ?>">
                                 
                                 <button type="submit" name="deleteTask" class="delete-btn">Delete</button>
                             </form>

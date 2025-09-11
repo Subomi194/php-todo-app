@@ -2,11 +2,11 @@
 
     declare(strict_types=1);
 
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
     require_once __DIR__ . '/Router.php';
 
-    $router = new Router();
+    $baseDir = dirname($_SERVER['SCRIPT_NAME']); 
+
+    $router = new Router($baseDir);
 
     // Add routes
     $router->add('/', function () {
@@ -37,5 +37,6 @@
         require __DIR__ . '/include/todo_actions/todo_controller.php';
     });
     
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     // Dispatch
     $router->dispatch($path);

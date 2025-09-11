@@ -2,6 +2,8 @@
 
     declare(strict_types=1);
 
+    require_once __DIR__ . '/TodoDTO.php';
+
     class TodoModel
     {
         private PDO $pdo;
@@ -19,7 +21,14 @@
             $stmt->bindParam(':user_id', $this->userId);
             $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $tasks = [];
+            foreach ($rows as $row) {
+                $tasks[] = TodoDTO::create($row);
+            }
+
+            return $tasks;
         }
       
         public function insertTask(string $task): bool{
@@ -44,7 +53,7 @@
             return $stmt->rowCount();
         }
 
-        public function toggleTaskStatuS(int $taskId): bool{
+        public function toggleTaskStatus(int $taskId): bool{
             $stmt = $this->pdo->prepare("
                 SELECT status FROM todos WHERE id = :id AND user_id = :user_id
             ");
