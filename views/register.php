@@ -1,10 +1,6 @@
 
 <?php
 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     require_once __DIR__ . "/../include/config/session_config.php";
 
     $error = "";
@@ -87,7 +83,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='/PHP101/css/styles.css'>
+    <link rel="stylesheet" href="/css/styles.css">
+
     <title>Register</title>
 </head>
 <body>

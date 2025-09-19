@@ -18,7 +18,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel='stylesheet' href='/PHP101/css/home.css'>
+    <link rel='stylesheet' href='/css/home.css'>
     <title>To-Do List</title>
 </head>
 <body>
